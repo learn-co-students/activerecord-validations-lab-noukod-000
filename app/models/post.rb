@@ -6,4 +6,10 @@ class Post < ActiveRecord::Base
   validates :category, inclusion: {in: ["Fiction", "Non-Fiction"]}
   validates :clickbait
 
+  def clickbait
+    if !title.nil? && (!title.include?("You Won't" || "Secret" || "Top" || "Guess"))
+      errors.add(:clickbait, "That is not a clickbait worthy title. Try again.")
+    end
+  end
+
 end
